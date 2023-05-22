@@ -38,7 +38,8 @@ public class LeftMenu extends javax.swing.JPanel {
             public void newUser(List<UserAccountModel> users) {
                 for (UserAccountModel user : users) {
                     userAccounts.add(user);
-                    menuList.add(new ItemPeople(user.getUserName()), "wrap");
+                    menuList.add(new ItemPeople(user), "wrap");
+                    System.out.println(getClass() + "Inside newUser() Line 42: status = " + user.isStatus());
                     refreshMenuList();
                 }
             }
@@ -50,7 +51,7 @@ public class LeftMenu extends javax.swing.JPanel {
 //        Testing data
         menuList.removeAll();
         for(UserAccountModel user : userAccounts) {
-            menuList.add(new ItemPeople(user.getUserName()), "wrap");
+            menuList.add(new ItemPeople(null), "wrap");
         }
         refreshMenuList();
     }
@@ -59,7 +60,7 @@ public class LeftMenu extends javax.swing.JPanel {
 //        Testing data
         menuList.removeAll();
         for(int i = 0 ; i < 7 ; i++) {
-            menuList.add(new ItemPeople("Group " + i) , "wrap");
+            menuList.add(new ItemPeople(null) , "wrap");
         }
         refreshMenuList();
     }
@@ -67,7 +68,7 @@ public class LeftMenu extends javax.swing.JPanel {
 //        Testing data
         menuList.removeAll();
         for(int i = 0 ; i < 5 ; i++) {
-            menuList.add(new ItemPeople("Box " + i) , "wrap");
+            menuList.add(new ItemPeople(null) , "wrap");
         }
         refreshMenuList();
     }

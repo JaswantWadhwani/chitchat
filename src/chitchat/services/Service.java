@@ -15,7 +15,7 @@ public class Service {
     private static Service instance;
     private Socket client;
     private static final int PORT_NUMBER = 9999;
-    private String IP = "localhost" ;
+    private String IP ;
     private UserAccountModel user;
 
     public UserAccountModel getUser() {
@@ -38,6 +38,13 @@ public class Service {
     
     public void startServer() {
         try {
+            try ( final DatagramSocket datagramSocket = new DatagramSocket ()) {
+                datagramSocket.connect (InetAddress.getByName ( "8.8.8.8" ), 12345 );
+                IP =  datagramSocket.getLocalAddress ().getHostAddress ();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
             client = IO.socket("http://" + IP + ":" + PORT_NUMBER);
             client.on("list_user", new Emitter.Listener() {
                 @Override
