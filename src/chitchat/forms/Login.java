@@ -43,36 +43,38 @@ public class Login extends javax.swing.JPanel {
 //                                System.out.println(os[0]);
 //                                System.out.println(os[1]);
                                 if (os.length > 0) {
-//                                    System.out.println("Line 44");
+//                                    System.out.println(getClass() + " Line 44: Inside call()");
                                     boolean action = (Boolean) os[0];
                                     if (action) {
-//                                        System.out.println("Line 47");
+//                                        System.out.println(getClass() + " Line 47: action = " + action);
                                         Service.getInstance().setUser(new UserAccountModel(os[1]));
                                         PublicEvent.getInstance().getEventMain().showLoading(false);
                                         PublicEvent.getInstance().getEventMain().initChat();
                                     } else {
                                         //  password wrong
-//                                        System.out.println("Line 53");
+//                                        System.out.println(getClass() + " Line 53");
                                         
                                         PublicEvent.getInstance().getEventMain().showLoading(false);
                                     }
                                 } else {
-//                                    System.out.println("Line 56");
+//                                    System.out.println(getClass() + " Line 56");
                                     PublicEvent.getInstance().getEventMain().showLoading(false);
                                 }
                             }
                         });
 
-//                        System.out.println("Line 71");
+//                        System.out.println(getClass() + " Line 66");
                     }
                 }).start();
             }
 
             @Override
             public void register(RegisterModel data, EventMessage message) {
+//                System.out.println(getClass() + " Line 73: inside Register , data = " + data);
                 Service.getInstance().getClient().emit("register", data.toJsonObject(), new Ack() {
                     @Override
                     public void call(Object... os) {
+//                        System.out.println(getClass() + " Line 77");
                         if (os.length > 0) {
                             MessageModel ms = new MessageModel((boolean) os[0], os[1].toString());
                             if (ms.isAction()) {

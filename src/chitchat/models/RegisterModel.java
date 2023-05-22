@@ -18,6 +18,7 @@ public class RegisterModel {
     private int age;
     
     public RegisterModel() {
+    System.out.println(getClass() + " Line 21(Inside COnstructor)");
         
     }
     
@@ -53,6 +54,7 @@ public class RegisterModel {
     
     public JSONObject toJsonObject() {
         try {
+//            System.out.println(getClass() + " Inside jsonObject()");
             JSONObject json = new JSONObject();
             json.put("userName", userName);
             json.put("password", password);

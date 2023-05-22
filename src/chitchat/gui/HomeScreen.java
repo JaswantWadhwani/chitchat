@@ -35,7 +35,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void init() {
 //        Setting the icon of our app
-        setIconImage(new ImageIcon("D:/JavaProjectCoaching/ChitChat/src/chitchat/icons/icon.png").getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/chitchat/icons/icon.png")).getImage());
         ComponentResizer component = new ComponentResizer();
 //        Registering this frame as a component in order to resize it at run time by user
         component.registerComponent(this);
@@ -196,6 +196,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
             @Override
             public void initChat() {
+//                System.out.println(getClass() + " Line 199: initChat()");
                 home.setVisible(true);
                 login.setVisible(false);
                 Service.getInstance().getClient().emit("list_user", Service.getInstance().getUser().getUserId());

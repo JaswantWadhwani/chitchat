@@ -37,7 +37,6 @@ public class Service {
     }
     
     public void startServer() {
-        System.out.println("Line 40");
         try {
             client = IO.socket("http://" + IP + ":" + PORT_NUMBER);
             client.on("list_user", new Emitter.Listener() {

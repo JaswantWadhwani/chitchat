@@ -24,6 +24,7 @@ public class RegisterFrame extends javax.swing.JPanel {
     private int age;
 
     public RegisterFrame() {
+//        System.out.println(RegisterFrame.class + " Line 21(Inside Constructor)");
         initComponents();
     }
 
@@ -163,24 +164,30 @@ public class RegisterFrame extends javax.swing.JPanel {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         if (validInputs()) {
+//            System.out.println(getClass() + " Line 167: actionPerformed()");
             RegisterModel data = new RegisterModel(userName, password, age);
             PublicEvent.getInstance().getEventLogin().register(data, new EventMessage() {
                 @Override
                 public void callMessage(MessageModel message) {
+//                    System.out.println(getClass() + " Line 172: callMessage()");
                     if (!message.isAction()) {
+//                        System.out.println(getClass() + " Line 174: isAction = " + message.isAction());
                         lblError.setText(message.getMessage());
                     } else {
-                        RegisterModel data = new RegisterModel(userName, password, age);
-                        PublicEvent.getInstance().getEventLogin().register(data, new EventMessage() {
-                            @Override
-                            public void callMessage(MessageModel message) {
-                                if (!message.isAction()) {
-                                    lblError.setText(message.getMessage());
-                                } else {
+//                        RegisterModel data = new RegisterModel(userName, password, age);
+//                        System.out.println(getClass() + " Line 178 data = " + data);
+//                        PublicEvent.getInstance().getEventLogin().register(data, new EventMessage() {
+//                            @Override
+//                            public void callMessage(MessageModel message) {
+//                                System.out.println(getClass() + " Line 182 action = " + message.isAction());
+//                                if (!message.isAction()) {
+//                                    lblError.setText(message.getMessage());
+//                                } else {
                                     PublicEvent.getInstance().getEventMain().initChat();
-                                }
-                            }
-                        });
+//                                }
+//                            }
+//                        });
+//                        System.out.println(getClass() + " Line 190");
                     }
                 }
             });
