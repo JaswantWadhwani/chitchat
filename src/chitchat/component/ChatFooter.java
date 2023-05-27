@@ -6,7 +6,9 @@
 package chitchat.component;
 
 import chitchat.event.PublicEvent;
+import chitchat.models.MessageSendingModel;
 import chitchat.models.UserAccountModel;
+import chitchat.services.Service;
 import chitchat.swing.utilities.JIMSendTextPane;
 import chitchat.swing.utilities.ScrollBar;
 import java.awt.Color;
@@ -81,7 +83,9 @@ public class ChatFooter extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent ae) {
                 String text = txt.getText().trim();
                 if (!text.equals("")) {
-                    PublicEvent.getInstance().getEventChat().sendMessage(text);
+                    MessageSendingModel message = new MessageSendingModel(Service.getInstance().getUser().getUserId(), user.getUserId(), text);
+                    send(message);
+                    PublicEvent.getInstance().getEventChat().sendMessage(message);
                     txt.setText("");
                     txt.grabFocus();
                     refresh();
@@ -92,6 +96,10 @@ public class ChatFooter extends javax.swing.JPanel {
         });
         panel.add(cmd);
         add(panel);
+    }
+
+    private void send(MessageSendingModel data) {
+        Service.getInstance().getClient().emit("send_to_user", data.toJsonObject());
     }
 
     private void refresh() {

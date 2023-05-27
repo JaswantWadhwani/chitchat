@@ -5,11 +5,16 @@
  */
 package chitchat.event;
 
+import chitchat.models.MessageReceivingModel;
+import chitchat.models.MessageSendingModel;
+
 /**
  *
  * @author Jatin Wadhwani
  */
 public interface EventChat {
 
-    public void sendMessage(String text);
+    public void sendMessage(MessageSendingModel data);
+
+    public void receiveMessage(MessageReceivingModel data);
 }

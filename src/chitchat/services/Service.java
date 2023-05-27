@@ -1,6 +1,7 @@
 package chitchat.services;
 
 import chitchat.event.PublicEvent;
+import chitchat.models.MessageReceivingModel;
 import chitchat.models.UserAccountModel;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -45,7 +46,7 @@ public class Service {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
             client = IO.socket("http://" + IP + ":" + PORT_NUMBER);
             client.on("list_user", new Emitter.Listener() {
                 @Override
@@ -77,6 +78,15 @@ public class Service {
                 }
             }
             );
+            client.on("receive_ms", new Emitter.Listener() {
+                @Override
+                public void call(Object... os) {
+                    MessageReceivingModel message = new MessageReceivingModel(os[0]);
+                    PublicEvent.getInstance().getEventChat().receiveMessage(message);
+                }
+
+            });
+
             client.open();
         } catch (URISyntaxException ex) {
             error(ex);

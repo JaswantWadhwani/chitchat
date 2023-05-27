@@ -5,12 +5,13 @@
  */
 package chitchat.component;
 
+import chitchat.models.MessageReceivingModel;
+import chitchat.models.MessageSendingModel;
 import chitchat.swing.utilities.ScrollBar;
 import java.awt.Adjustable;
 import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
-import javax.swing.Icon;
 import javax.swing.JScrollBar;
 import net.miginfocom.swing.MigLayout;
 
@@ -26,15 +27,6 @@ public class ChatBody extends javax.swing.JPanel {
     public ChatBody() {
         initComponents();
         init();
-//        addDate("09/03/2002");
-//        addItemOnRightSide("Hello friends, How are you?Hope you are doing good.It,s been a while since we talked to each other.How are your parents?How are your sisters" , new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/dog.png")));
-//        addDate("BirthDay");
-//        String [] img = {"L8Cc:MpI*KtR_Mj[IVayD4ae4TV?" , "LHHyCExu~0%L-*%M9Fxu~SIV-;M|"};
-//        addItemOnLeftSide("Hello guys!" , "Jaswant" , img);
-//        addItemOnLeftSide("Hi, I am fine.\nWhat about you? Hello friends, How are you?Hope you are doing good.It,s been a while since we talked to each other.How are your parents?How are your sisters" , "Jaswant" , new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/dog.png")) , new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/dog.png")));
-//        addItemOnLeftSide("" , "Jatin" ,  new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/dog.png")));
-//        addFileOnLeftSide("" , "Jaswant" , "Demo.java" , "115KB");
-//        addFileOnRightSide("" , "Test.java" , "120KB");
     }
 
     private void init() {
@@ -43,15 +35,13 @@ public class ChatBody extends javax.swing.JPanel {
         sp.getVerticalScrollBar().setBackground(Color.white);
     }
     
-    public void addItemOnLeftSide(String text , String userProfile , Icon... iamge) {
-        ChatLeftPartWithProfile item = new ChatLeftPartWithProfile();
-        item.setText(text);
-        item.setImage(iamge);
+    public void addItemOnLeftSide(MessageReceivingModel data) {
+        ChatLeftPart item = new ChatLeftPart();
+        item.setText(data.getText());
         item.setTime();
-        item.setUserProfile(userProfile);
         body.add(item , "wrap , w 100::80%");
-        body.repaint();
-        body.revalidate();
+        repaint();
+        revalidate();
     }
     
     public void addItemOnLeftSide(String text , String userProfile , String [] iamge) {
@@ -65,13 +55,12 @@ public class ChatBody extends javax.swing.JPanel {
         body.revalidate();
     }
     
-    public void addItemOnRightSide(String text , Icon... image) {
+    public void addItemOnRightSide(MessageSendingModel data) {
         ChatRightPart item = new ChatRightPart();
-        item.setText(text);
-        item.setImage(image);
+        item.setText(data.getText());
         body.add(item , "wrap , al right , w 100::80%");
-        body.repaint();
-        body.revalidate();
+        repaint();
+        revalidate();
         item.setTime();
         scrollToBottom();
     }
@@ -102,6 +91,12 @@ public class ChatBody extends javax.swing.JPanel {
         body.add(item , "wrap , al center");
         body.repaint();
         body.revalidate();
+    }
+    
+    public void clearChat() {
+        body.removeAll();
+        repaint();
+        revalidate();
     }
     
     private void scrollToBottom() {
