@@ -10,6 +10,7 @@ import chitchat.event.EventLeftMenu;
 import chitchat.event.PublicEvent;
 import chitchat.models.UserAccountModel;
 import chitchat.swing.utilities.ScrollBar;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import net.miginfocom.swing.MigLayout;
@@ -39,8 +40,47 @@ public class LeftMenu extends javax.swing.JPanel {
                 for (UserAccountModel user : users) {
                     userAccounts.add(user);
                     menuList.add(new ItemPeople(user), "wrap");
-                    System.out.println(getClass() + "Inside newUser() Line 42: status = " + user.isStatus());
+//                    System.out.println(getClass() + "Inside newUser() Line 42: status = " + user.isStatus());
                     refreshMenuList();
+                }
+            }
+            
+            @Override
+            public void connectUser(int userId) {
+                for(UserAccountModel user : userAccounts) {
+                    if(user.getUserId() == userId) {
+                        user.setStatus(true);
+                        PublicEvent.getInstance().getEventMain().updateUser(user);
+                        break;
+                    }
+                }
+                if(menuMessage.isSelected()) {
+                    for(Component component: menuList.getComponents()) {
+                        ItemPeople item = (ItemPeople)component;
+                        if(item.getUser().getUserId() == userId) {
+                            item.updateStatus();
+                            break;
+                        }
+                    }
+                }
+            }
+            @Override
+            public void disconnectUser(int userId) {
+                for(UserAccountModel user : userAccounts) {
+                    if(user.getUserId() == userId) {
+                        user.setStatus(false);
+                        PublicEvent.getInstance().getEventMain().updateUser(user);
+                        break;
+                    }
+                }
+                if(menuMessage.isSelected()) {
+                    for(Component component: menuList.getComponents()) {
+                        ItemPeople item = (ItemPeople)component;
+                        if(item.getUser().getUserId() == userId) {
+                            item.updateStatus();
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -185,10 +225,10 @@ public class LeftMenu extends javax.swing.JPanel {
     private void menuMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMessageActionPerformed
         if(!menuMessage.isSelected()){
             menuMessage.setSelected(true);
-            menuGroup.setSelected(false);
-            menuBox.setSelected(false);
             menuGroup.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png")));
             menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png")));
+            menuGroup.setSelected(false);
+            menuBox.setSelected(false);
             showMessage();
         }
     }//GEN-LAST:event_menuMessageActionPerformed
@@ -197,9 +237,9 @@ public class LeftMenu extends javax.swing.JPanel {
         if(!menuGroup.isSelected()) {
             menuMessage.setSelected(false);
             menuGroup.setSelected(true);
-            menuBox.setSelected(false);
             menuMessage.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message.png")));
             menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png")));
+            menuBox.setSelected(false);
             showGroup();
         }    
     }//GEN-LAST:event_menuGroupActionPerformed

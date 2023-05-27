@@ -6,6 +6,7 @@
 package chitchat.component;
 
 import chitchat.event.PublicEvent;
+import chitchat.models.UserAccountModel;
 import chitchat.swing.utilities.JIMSendTextPane;
 import chitchat.swing.utilities.ScrollBar;
 import java.awt.Color;
@@ -31,6 +32,16 @@ public class ChatFooter extends javax.swing.JPanel {
     /**
      * Creates new form ChatTitle
      */
+    public UserAccountModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserAccountModel user) {
+        this.user = user;
+    }
+
+    private UserAccountModel user;
+
     public ChatFooter() {
         initComponents();
         init();

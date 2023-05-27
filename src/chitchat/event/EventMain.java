@@ -5,6 +5,8 @@
  */
 package chitchat.event;
 
+import chitchat.models.UserAccountModel;
+
 /**
  *
  * @author Jatin Wadhwani
@@ -15,4 +17,8 @@ public interface EventMain {
     public void showLoading(boolean show);
 
     public void initChat();
+    
+    public void selectUser(UserAccountModel user);
+    
+    public void updateUser(UserAccountModel user);
 }

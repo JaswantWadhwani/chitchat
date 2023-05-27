@@ -20,6 +20,7 @@ import javax.swing.SwingUtilities;
  *  of the component.
  */
 public class ComponentResizer extends MouseAdapter {
+    
 	private final static Dimension MINIMUM_SIZE = new Dimension(10, 10);
 	private final static Dimension MAXIMUM_SIZE =
 		new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);

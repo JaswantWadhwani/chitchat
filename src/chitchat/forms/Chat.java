@@ -10,6 +10,7 @@ import chitchat.component.ChatFooter;
 import chitchat.component.ChatTitle;
 import chitchat.event.EventChat;
 import chitchat.event.PublicEvent;
+import chitchat.models.UserAccountModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -21,6 +22,10 @@ public class Chat extends javax.swing.JPanel {
     /**
      * Creates new form Menu_Left
      */
+    
+    private ChatTitle chatTitle;
+    private ChatBody chatBody;
+    private ChatFooter chatFooter;
     public Chat() {
         initComponents();
         init();
@@ -28,9 +33,9 @@ public class Chat extends javax.swing.JPanel {
 
     private void init() {
         setLayout(new MigLayout("fillx", "0[fill]0", "0[]0[100%, bottom]0[shrink 0]"));
-        ChatTitle chatTitle = new ChatTitle();
-        ChatBody chatBody = new ChatBody();
-        ChatFooter chatFooter = new ChatFooter();
+        chatTitle = new ChatTitle();
+        chatBody = new ChatBody();
+        chatFooter = new ChatFooter();
         PublicEvent.getInstance().addEventChat(new EventChat() {
             @Override
             public void sendMessage(String text) {
@@ -40,6 +45,16 @@ public class Chat extends javax.swing.JPanel {
         add(chatTitle, "wrap");
         add(chatBody, "wrap");
         add(chatFooter, "h ::50%");
+    }
+
+    
+    public void setUser(UserAccountModel user) {
+        chatTitle.setUserName(user);
+        chatFooter.setUser(user);
+    }
+
+    public void updateUser(UserAccountModel user) {
+        chatTitle.updateUser(user);
     }
 
     /**

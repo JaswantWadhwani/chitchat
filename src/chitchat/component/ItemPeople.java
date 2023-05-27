@@ -5,6 +5,7 @@
  */
 package chitchat.component;
 
+import chitchat.event.PublicEvent;
 import chitchat.models.UserAccountModel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -19,15 +20,19 @@ public class ItemPeople extends javax.swing.JPanel {
     /**
      * Creates new form Item_People
      */
+    
+    private boolean mouseOver;
     private UserAccountModel user;
+    
     public ItemPeople() {
         initComponents();
     }
 
     public ItemPeople(UserAccountModel user) {
-        this();
+        this.user = user;
+        initComponents();
         lblName.setText(user.getUserName());
-        System.out.println(getClass()+" Line 30: status = "+user.isStatus());
+//        System.out.println(getClass()+" Line 30: status = "+user.isStatus());
         activeStatus.setActive(user.isStatus());
         init();
     }
@@ -38,6 +43,7 @@ public class ItemPeople extends javax.swing.JPanel {
     
     public void updateStatus() {
         activeStatus.setActive(user.isStatus());
+//        repaint();
     }
     
     private void init() {
@@ -46,11 +52,20 @@ public class ItemPeople extends javax.swing.JPanel {
             @Override
             public void mouseEntered(MouseEvent me) {
                 setBackground(new Color(240,240,240));
+                mouseOver = true;
             }
             
             @Override
             public void mouseExited(MouseEvent me) {
                 setBackground(new Color(229,229,229));
+                mouseOver = false;
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                if(mouseOver) {
+                    PublicEvent.getInstance().getEventMain().selectUser(user);
+                }
             }
         });
     }

@@ -5,6 +5,7 @@
  */
 package chitchat.forms;
 
+import chitchat.models.UserAccountModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -16,6 +17,8 @@ public class Home extends javax.swing.JLayeredPane {
     /**
      * Creates new form Home
      */
+    
+    private Chat chat;
     public Home() {
         initComponents();
         init();
@@ -24,9 +27,21 @@ public class Home extends javax.swing.JLayeredPane {
     private void init() {
         setLayout(new MigLayout("fillx , filly" , "0[200!]5[fill , 100%]5[200!]0" , "0[fill]0"));
         this.add(new LeftMenu());
-        this.add(new Chat());
+        chat = new Chat();
+        this.add(chat);
         this.add(new RightMenu());
+        chat.setVisible(false);
     }
+    
+    public void setUser(UserAccountModel user) {
+        chat.setUser(user);
+        chat.setVisible(true);
+    }
+
+    public void updateUser(UserAccountModel user) {
+        chat.updateUser(user);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

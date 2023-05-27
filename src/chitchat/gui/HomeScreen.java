@@ -8,10 +8,10 @@ package chitchat.gui;
 import chitchat.event.EventImageView;
 import chitchat.event.EventMain;
 import chitchat.event.PublicEvent;
+import chitchat.models.UserAccountModel;
 import chitchat.services.Service;
 import chitchat.swing.utilities.ComponentResizer;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
-import io.socket.emitter.Emitter;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.Icon;
@@ -201,6 +201,17 @@ public class HomeScreen extends javax.swing.JFrame {
                 login.setVisible(false);
                 Service.getInstance().getClient().emit("list_user", Service.getInstance().getUser().getUserId());
             }
+            
+            @Override
+            public void selectUser(UserAccountModel user) {
+                home.setUser(user);
+            }
+
+            @Override
+            public void updateUser(UserAccountModel user) {
+                home.updateUser(user);
+            }
+
         });
         PublicEvent.getInstance().addEventImageView(new EventImageView() {
             @Override

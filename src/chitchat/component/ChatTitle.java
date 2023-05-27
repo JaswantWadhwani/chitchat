@@ -5,6 +5,7 @@
  */
 package chitchat.component;
 
+import chitchat.models.UserAccountModel;
 import java.awt.Color;
 
 /**
@@ -16,20 +17,43 @@ public class ChatTitle extends javax.swing.JPanel {
     /**
      * Creates new form ChatTitle
      */
+    public UserAccountModel getUser() {
+        return user;
+    }
+
+    private UserAccountModel user;
+
     public ChatTitle() {
         initComponents();
     }
 
-    public void setUserName(String userName) {
-        lblName.setText(userName);
+    public void setUserName(UserAccountModel user) {
+        this.user = user;
+        lblName.setText(user.getUserName());
+        if (user.isStatus()) {
+            statusActive();
+        } else {
+            setStatusText("Offline");
+        }
+    }
+
+    public void updateUser(UserAccountModel user) {
+        if (this.user == user) {
+            lblName.setText(user.getUserName());
+            if (user.isStatus()) {
+                statusActive();
+            } else {
+                setStatusText("Offline");
+            }
+        }
     }
     
-    public void statusActive() {
+    private void statusActive() {
         lblStatus.setText("Active now");
         lblStatus.setForeground(new Color(40,147,59));
     }
     
-    public void setStatusText(String text) {
+    private void setStatusText(String text) {
         lblStatus.setText(text);
         lblStatus.setForeground(new Color(160,160,160));
     }

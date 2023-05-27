@@ -15,4 +15,6 @@ import java.util.List;
 public interface EventLeftMenu {
 
     public void newUser(List<UserAccountModel> users);
+    public void connectUser(int userId);
+    public void disconnectUser(int userId);
 }
