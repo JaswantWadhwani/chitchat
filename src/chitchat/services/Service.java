@@ -54,9 +54,12 @@ public class Service {
                     //  list user
                     List<UserAccountModel> users = new ArrayList<>();
                     for (Object o : os) {
+//                        System.out.println(getClass() + "Inside call , Line 57, Object: " + o);
                         UserAccountModel u = new UserAccountModel(o);
+//                        System.out.println(getClass() + "Inside call , Line 59, age: " + u.getAge());
                         if (u.getUserId() != user.getUserId()) {
                             users.add(u);
+//                        System.out.println(getClass() + "Inside call() Line 60: age = " + u.getAge());
                         }
                     }
                     PublicEvent.getInstance().getEventLeftMenu().newUser(users);
@@ -82,6 +85,7 @@ public class Service {
                 @Override
                 public void call(Object... os) {
                     MessageReceivingModel message = new MessageReceivingModel(os[0]);
+//                    System.out.println(getClass()+"Inside call, Line 88: "+os[0]);
                     PublicEvent.getInstance().getEventChat().receiveMessage(message);
                 }
 

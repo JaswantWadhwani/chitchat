@@ -5,6 +5,7 @@
  */
 package chitchat.component;
 
+import chitchat.bannedwords.WordChecker;
 import chitchat.models.MessageReceivingModel;
 import chitchat.models.MessageSendingModel;
 import chitchat.swing.utilities.ScrollBar;
@@ -37,6 +38,45 @@ public class ChatBody extends javax.swing.JPanel {
     
     public void addItemOnLeftSide(MessageReceivingModel data) {
         ChatLeftPart item = new ChatLeftPart();
+//        System.out.println(getClass() + " Line 41: " + data.toJsonObject());
+        if(data.getReceiverAge() < 10) {
+            String msg = WordChecker.isABannedWord(data.getText());
+            if(msg != null) {
+                System.out.println("These words are banned as they contain profanity");
+                data.setText(msg);
+            }
+//            data.setText(msg);
+        }
+
+//         String [] msg = data.getText().split(",. ?");
+//         for(int i = 0 ; i < msg.length ; i++) {
+//             if(WordChecker.isABannedWord(msg[i]) == null) {
+//                 System.out.println("Line 52: " + msg[i]);
+//             }
+//         }
+//         System.out.println("Line 55");
+//         for(String s : msg) {
+//             System.out.print(s);
+//         }
+//         System.out.println("Line 58");
+
+//        String temp = null;
+//        data.getText().trim();
+//        for(int i = 0 ; i < data.getText().length() ; i++) {
+//            if(i != 0 && data.getText().charAt(i) == ' ' || data.getText().charAt(i) == ',') {
+//                
+//            }
+//            temp = temp + data.getText().charAt(i);
+//        }
+//        for(int i = 0 ; i < msg.length ; i++) {
+//            if(WordChecker.isABannedWord(msg[i]) != null) {
+//                if(age < 10) {
+//                    System.out.println("Uh hoo... You are too young to use these words...");
+//                    
+//                }
+//            }
+//        }
+//        System.out.println(getClass() + " Line 46: age = " + age);
         item.setText(data.getText());
         item.setTime();
         body.add(item , "wrap , w 100::80%");
@@ -44,8 +84,23 @@ public class ChatBody extends javax.swing.JPanel {
         revalidate();
     }
     
-    public void addItemOnLeftSide(String text , String userProfile , String [] iamge) {
+    public void addItemOnLeftSide(String text , String userProfile , String [] iamge, int age) {
         ChatLeftPartWithProfile item = new ChatLeftPartWithProfile();
+//        if(age < 10) {
+//            text = WordChecker.isABannedWord(text);
+//            if(text != null) {
+//                System.out.println("Uh hoo... You are too young to use these words...");
+//            }
+//        }
+
+        if(age < 10) {
+            String msg = WordChecker.isABannedWord(text);
+            if(msg != null) {
+                System.out.println("Uh hoo... You are too young to use these words...");
+                text = msg;
+            }
+        }
+        
         item.setText(text);
         item.setImage(iamge);
         item.setTime();
@@ -57,6 +112,36 @@ public class ChatBody extends javax.swing.JPanel {
     
     public void addItemOnRightSide(MessageSendingModel data) {
         ChatRightPart item = new ChatRightPart();
+//        System.out.println(getClass() + " Line 115: " + data.toJsonObject());
+        
+        if(data.getSenderAge() < 10) { 
+            String msg = WordChecker.isABannedWord(data.getText());
+            if(msg != null) {
+                System.out.println("Uh hoo... You are too young to use these words...");
+                data.setText(msg);
+            }
+//            System.out.println(getClass() + " Line 111: " + data.toJsonObject());
+//            data.setText(msg);
+//            System.out.println(getClass() + " Line 113: message = " + msg + " json = " + data.toJsonObject());
+        }
+        
+        else if(data.getReceiverAge() < 10) { 
+            String msg = WordChecker.isABannedWord(data.getText());
+            if(msg != null) {
+                System.out.println("You are chatting with a person whose age is less than 10 year old so you are not allowed to use words containing profanity");
+                data.setText(msg);
+            }
+//            System.out.println(getClass() + " Line 111: " + data.toJsonObject());
+//            data.setText(msg);
+//            System.out.println(getClass() + " Line 113: message = " + msg + " json = " + data.toJsonObject());
+        }
+//        System.out.println(getClass() + " Line 112: " + data.toJsonObject());
+//        System.out.println(getClass() + " Line 113: age = " + data.getAge() + "text = " + data.getText());
+//        System.out.println(getClass() + " Line 114: " + data);
+//        System.out.println(getClass() + " Line 115: " + item);
+//        if(data == null || item == null) {
+//            System.out.println(getClass() + "Line 117");
+//        }
         item.setText(data.getText());
         body.add(item , "wrap , al right , w 100::80%");
         repaint();
@@ -65,8 +150,17 @@ public class ChatBody extends javax.swing.JPanel {
         scrollToBottom();
     }
     
-    public void addFileOnLeftSide(String text , String userProfile , String fileName , String fileSize) {
+    public void addFileOnLeftSide(String text , String userProfile , String fileName , String fileSize, int age) {
         ChatLeftPartWithProfile item = new ChatLeftPartWithProfile();
+        
+        if(age < 10) {
+            String msg = WordChecker.isABannedWord(text);
+            if(msg != null) {
+                System.out.println("You are chatting with a person whose age is less than 10 year old so you are not allowed to use words containing profanity");
+                text = msg;
+            }
+        }
+        
         item.setText(text);
         item.setFile(fileName, fileSize);
         item.setTime();
@@ -76,8 +170,15 @@ public class ChatBody extends javax.swing.JPanel {
         body.revalidate();
     }
     
-    public void addFileOnRightSide(String text , String fileName , String fileSize) {
+    public void addFileOnRightSide(String text , String fileName , String fileSize, int age) {
         ChatRightPart item = new ChatRightPart();
+        if(age < 10) {
+            text = WordChecker.isABannedWord(text);
+            if(text != null) {
+                System.out.println("You are chatting with a person whose age is less than 10 year old so you are not allowed to use words containing profanity");
+            }
+        }
+        
         item.setText(text);
         item.setFile(fileName, fileSize);
         body.add(item , "wrap , al right , w 100::80%");

@@ -22,14 +22,16 @@ public class UserAccountModel {
     private int age;
     
     public UserAccountModel(Object json) {
+//        System.out.println(getClass() + " Inside Constructor, Line 25");
         JSONObject obj = (JSONObject)json ;
         try {
             userId = obj.getInt("userId");
             userName = obj.getString("userName");
-            gender = obj.getString("gender");
-            image = obj.getString("image");
             status = obj.getBoolean("status");
             age = obj.getInt("age");
+//            gender = obj.getString("gender");
+//            image = obj.getString("image");
+//            System.out.println(getClass() + " Inside Constructor, Line 34: json = " +json);
         }
         catch(JSONException e) {
             System.err.println(e);

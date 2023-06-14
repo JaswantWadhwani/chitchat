@@ -41,13 +41,28 @@ public class Chat extends javax.swing.JPanel {
         PublicEvent.getInstance().addEventChat(new EventChat() {
             @Override
             public void sendMessage(MessageSendingModel data) {
+//                System.out.println("Line 44:  Sender's id: "+data.getFromUserID()+"Sender's age: "+data.getAge());
+//                System.out.println(getClass()+" Line 45: " + data.toJsonObject() + " age = " + data.getAge());
+//                if(data != null) {
+//                    System.out.println(getClass() + "Line 47: "+data);
+//                }
+//                System.out.println(getClass()+" Line 49: " + data + " " + data.toJsonObject() + " age = " + data.getAge());                
                 chatBody.addItemOnRightSide(data);
             }
 
             @Override
             public void receiveMessage(MessageReceivingModel data) {
                 if (chatTitle.getUser().getUserId() == data.getFromUserID()) {
+//                    System.out.println(getClass()+" Line 53: "+data.toJsonObject() + " receiver's age = " + data.getSenderAge());
+//                    System.out.println("Line 52: Receiver's name:"+chatTitle.getUser().getUserName()+" Receiver's age: "+chatTitle.getUser().getAge());
+//                    System.out.println(getClass() + "Line 50: "+data.toJsonObject());
+//                    System.out.println(getClass() + "Line 51: "+data.getText());
+//                    System.out.println(getClass() + "Line 52: "+data.getFromUserID());
+//                    System.out.println(getClass() + "Line 53: "+ chatTitle.getUser().getUserName());
+//                    System.out.println(getClass() + "Line 54: "+ chatTitle.getUser().getAge());
+//                    System.out.println(getClass() + "Line 55: "+ chatTitle.getUser().getUserId());
                     chatBody.addItemOnLeftSide(data);
+//                    System.out.println(getClass()+" Line 62: "+data.toJsonObject() + " sender's age = " + data.getSenderAge());
                 }
             }
         });

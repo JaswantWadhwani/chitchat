@@ -41,6 +41,7 @@ public class LeftMenu extends javax.swing.JPanel {
                     userAccounts.add(user);
                     menuList.add(new ItemPeople(user), "wrap");
 //                    System.out.println(getClass() + "Inside newUser() Line 42: status = " + user.isStatus());
+//                    System.out.println(getClass() + "Inside newUser() Line 44: age = " + user.getAge());
                     refreshMenuList();
                 }
             }

@@ -26,6 +26,7 @@ public class RegisterFrame extends javax.swing.JPanel {
     public RegisterFrame() {
 //        System.out.println(RegisterFrame.class + " Line 21(Inside Constructor)");
         initComponents();
+        txtUserName.grabFocus();
     }
 
     /**
@@ -159,6 +160,7 @@ public class RegisterFrame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoLoginActionPerformed
+        clear();
         PublicEvent.getInstance().getEventLogin().goLogin();
     }//GEN-LAST:event_btnGoLoginActionPerformed
 
@@ -262,4 +264,10 @@ public class RegisterFrame extends javax.swing.JPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
+
+    private void clear() {
+        txtUserName.setText("");
+        txtPassword.setText("");
+        txtConfirmPassword.setText("");
+    }
 }

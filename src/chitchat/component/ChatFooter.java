@@ -83,9 +83,13 @@ public class ChatFooter extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent ae) {
                 String text = txt.getText().trim();
                 if (!text.equals("")) {
-                    MessageSendingModel message = new MessageSendingModel(Service.getInstance().getUser().getUserId(), user.getUserId(), text);
+                    MessageSendingModel message = new MessageSendingModel(Service.getInstance().getUser().getUserId(), user.getUserId(), Service.getInstance().getUser().getAge(), user.getAge(), text);
+//                    System.out.println(getClass() + " Line 87: age = " + user.getAge());
                     send(message);
+//                    System.out.println(getClass() + " Line 89: age = " + user.getAge() + message.getText());
+//                    System.out.println(getClass() + "Line 90: sender id = " + Service.getInstance().getUser().getUserId() + "  receiver id = " + user.getUserId() + " age = " + Service.getInstance().getUser().getAge() + " text = " + text + " name = " + Service.getInstance().getUser().getUserName() + " age = " + user.getAge());
                     PublicEvent.getInstance().getEventChat().sendMessage(message);
+//                    System.out.println(getClass() + "Line 92");
                     txt.setText("");
                     txt.grabFocus();
                     refresh();

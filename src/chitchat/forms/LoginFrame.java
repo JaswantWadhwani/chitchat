@@ -20,6 +20,7 @@ public class LoginFrame extends javax.swing.JPanel {
      */
     public LoginFrame() {
         initComponents();
+        txtUserName.grabFocus();
     }
 
     /**
@@ -117,6 +118,7 @@ public class LoginFrame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        clear();
         PublicEvent.getInstance().getEventLogin().goRegister();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -134,4 +136,9 @@ public class LoginFrame extends javax.swing.JPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
+
+    private void clear() {
+        txtUserName.setText("");
+        txtPassword.setText("");
+    }
 }

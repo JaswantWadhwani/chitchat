@@ -39,6 +39,7 @@ public class ChatRightPart extends javax.swing.JLayeredPane {
     }
     
     public void setText(String text) {
+//        System.out.println(getClass() + "Line 42: text = " + text);
         if(text.equals("")) {
             chatItem.hideText();
         }

@@ -13,7 +13,24 @@ import org.json.JSONObject;
  * @author Jatin Wadhwani
  */
 public class MessageSendingModel {
+
+    private int fromUserID;
+    private int toUserID;
+    private int senderAge;
+    private int receiverAge;
+    private String text;
     
+    public MessageSendingModel() {
+    }
+
+    public MessageSendingModel(int fromUserID, int toUserID, int senderAge, int receiverAge, String text) {
+        this.fromUserID = fromUserID;
+        this.toUserID = toUserID;
+        this.senderAge = senderAge;
+        this.receiverAge = receiverAge;
+        this.text = text;
+    }
+
     public int getFromUserID() {
         return fromUserID;
     }
@@ -30,6 +47,22 @@ public class MessageSendingModel {
         this.toUserID = toUserID;
     }
 
+    public int getSenderAge() {
+        return senderAge;
+    }
+
+    public void setSenderAge(int senderAge) {
+        this.senderAge = senderAge;
+    }
+
+    public int getReceiverAge() {
+        return receiverAge;
+    }
+
+    public void setReceiverAge(int receiverAge) {
+        this.receiverAge = receiverAge;
+    }
+
     public String getText() {
         return text;
     }
@@ -37,26 +70,15 @@ public class MessageSendingModel {
     public void setText(String text) {
         this.text = text;
     }
-
-    public MessageSendingModel(int fromUserID, int toUserID, String text) {
-        this.fromUserID = fromUserID;
-        this.toUserID = toUserID;
-        this.text = text;
-    }
-
-    public MessageSendingModel() {
-    }
-
-    private int fromUserID;
-    private int toUserID;
-    private String text;
-
+    
     public JSONObject toJsonObject() {
         try {
             JSONObject json = new JSONObject();
             json.put("fromUserID", fromUserID);
             json.put("toUserID", toUserID);
             json.put("text", text);
+            json.put("senderAge", senderAge);
+            json.put("receiverAge", receiverAge);
             return json;
         } catch (JSONException e) {
             return null;
