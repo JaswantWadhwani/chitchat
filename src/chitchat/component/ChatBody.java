@@ -31,7 +31,7 @@ public class ChatBody extends javax.swing.JPanel {
     }
 
     private void init() {
-        body.setLayout(new MigLayout("fillx" , "" , "5[]5"));
+        body.setLayout(new MigLayout("fillx", "", "5[bottom]5"));
         sp.setVerticalScrollBar(new ScrollBar());
         sp.getVerticalScrollBar().setBackground(Color.white);
     }
@@ -79,7 +79,7 @@ public class ChatBody extends javax.swing.JPanel {
 //        System.out.println(getClass() + " Line 46: age = " + age);
         item.setText(data.getText());
         item.setTime();
-        body.add(item , "wrap , w 100::80%");
+        body.add(item, "wrap, w 100::80%");
         repaint();
         revalidate();
     }
@@ -105,7 +105,7 @@ public class ChatBody extends javax.swing.JPanel {
         item.setImage(iamge);
         item.setTime();
         item.setUserProfile(userProfile);
-        body.add(item , "wrap , w 100::80%");
+        body.add(item, "wrap, w 100::80%");
         body.repaint();
         body.revalidate();
     }
@@ -143,7 +143,7 @@ public class ChatBody extends javax.swing.JPanel {
 //            System.out.println(getClass() + "Line 117");
 //        }
         item.setText(data.getText());
-        body.add(item , "wrap , al right , w 100::80%");
+        body.add(item, "wrap, al right, w 100::80%");
         repaint();
         revalidate();
         item.setTime();
@@ -165,7 +165,7 @@ public class ChatBody extends javax.swing.JPanel {
         item.setFile(fileName, fileSize);
         item.setTime();
         item.setUserProfile(userProfile);
-        body.add(item , "wrap , w 100::80%");
+        body.add(item, "wrap, w 100::80%");
         body.repaint();
         body.revalidate();
     }
@@ -181,7 +181,7 @@ public class ChatBody extends javax.swing.JPanel {
         
         item.setText(text);
         item.setFile(fileName, fileSize);
-        body.add(item , "wrap , al right , w 100::80%");
+        body.add(item, "wrap, al right, w 100::80%");
         body.repaint();
         body.revalidate();
     }
@@ -189,7 +189,7 @@ public class ChatBody extends javax.swing.JPanel {
     public void addDate(String date) {
         ChatDate item = new ChatDate();
         item.setDate(date);
-        body.add(item , "wrap , al center");
+        body.add(item, "wrap, al center");
         body.repaint();
         body.revalidate();
     }
@@ -234,11 +234,11 @@ public class ChatBody extends javax.swing.JPanel {
         body.setLayout(bodyLayout);
         bodyLayout.setHorizontalGroup(
             bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+            .addGap(0, 826, Short.MAX_VALUE)
         );
         bodyLayout.setVerticalGroup(
             bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+            .addGap(0, 555, Short.MAX_VALUE)
         );
 
         sp.setViewportView(body);
@@ -247,11 +247,11 @@ public class ChatBody extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sp)
+            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sp)
+            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

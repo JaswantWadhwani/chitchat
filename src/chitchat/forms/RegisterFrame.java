@@ -9,7 +9,7 @@ import chitchat.event.EventMessage;
 import chitchat.event.PublicEvent;
 import chitchat.models.MessageModel;
 import chitchat.models.RegisterModel;
-import utility.PasswordEncryption;
+import chitchat.utility.PasswordEncryption;
 
 /**
  *

@@ -139,52 +139,37 @@ public class LeftMenu extends javax.swing.JPanel {
         menu.setBackground(new java.awt.Color(229, 229, 229));
         menu.setOpaque(true);
         menu.setPreferredSize(new java.awt.Dimension(150, 40));
+        menu.setLayout(new java.awt.GridLayout(1, 3));
 
+        menuMessage.setIconSelected(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message_selected.png"))); // NOI18N
         menuMessage.setSelected(true);
-        menuMessage.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message_selected.png"))); // NOI18N
+        menuMessage.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message.png"))); // NOI18N
         menuMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuMessageActionPerformed(evt);
             }
         });
+        menu.add(menuMessage);
 
         menuGroup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png"))); // NOI18N
-        menuGroup.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group_selected.png"))); // NOI18N
+        menuGroup.setIconSelected(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group_selected.png"))); // NOI18N
+        menuGroup.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png"))); // NOI18N
         menuGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuGroupActionPerformed(evt);
             }
         });
+        menu.add(menuGroup);
 
         menuBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png"))); // NOI18N
-        menuBox.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box_selected.png"))); // NOI18N
+        menuBox.setIconSelected(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box_selected.png"))); // NOI18N
+        menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png"))); // NOI18N
         menuBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBoxActionPerformed(evt);
             }
         });
-
-        menu.setLayer(menuMessage, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menu.setLayer(menuGroup, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menu.setLayer(menuBox, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
-        menu.setLayout(menuLayout);
-        menuLayout.setHorizontalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addComponent(menuMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(menuGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(menuBox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        menuLayout.setVerticalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        menu.add(menuBox);
 
         scrollBar.setBackground(new java.awt.Color(229, 229, 229));
         scrollBar.setBorder(null);
@@ -192,6 +177,7 @@ public class LeftMenu extends javax.swing.JPanel {
 
         menuList.setBackground(new java.awt.Color(229, 229, 229));
         menuList.setOpaque(true);
+        menuList.setPreferredSize(new java.awt.Dimension(0, 576));
 
         javax.swing.GroupLayout menuListLayout = new javax.swing.GroupLayout(menuList);
         menuList.setLayout(menuListLayout);
@@ -201,7 +187,7 @@ public class LeftMenu extends javax.swing.JPanel {
         );
         menuListLayout.setVerticalGroup(
             menuListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
 
         scrollBar.setViewportView(menuList);
@@ -210,7 +196,7 @@ public class LeftMenu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
             .addComponent(scrollBar)
         );
         layout.setVerticalGroup(
@@ -218,7 +204,7 @@ public class LeftMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(scrollBar)
+                .addComponent(scrollBar, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -226,8 +212,8 @@ public class LeftMenu extends javax.swing.JPanel {
     private void menuMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMessageActionPerformed
         if(!menuMessage.isSelected()){
             menuMessage.setSelected(true);
-            menuGroup.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png")));
-            menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png")));
+//            menuGroup.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png")));
+//            menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png")));
             menuGroup.setSelected(false);
             menuBox.setSelected(false);
             showMessage();
@@ -238,8 +224,8 @@ public class LeftMenu extends javax.swing.JPanel {
         if(!menuGroup.isSelected()) {
             menuMessage.setSelected(false);
             menuGroup.setSelected(true);
-            menuMessage.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message.png")));
-            menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png")));
+//            menuMessage.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message.png")));
+//            menuBox.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/box.png")));
             menuBox.setSelected(false);
             showGroup();
         }    
@@ -250,8 +236,8 @@ public class LeftMenu extends javax.swing.JPanel {
             menuMessage.setSelected(false);
             menuGroup.setSelected(false);
             menuBox.setSelected(true);
-            menuGroup.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png")));
-            menuMessage.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message.png")));
+//            menuGroup.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/group.png")));
+//            menuMessage.setSimpleIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/message.png")));
             showBox();
         }
     }//GEN-LAST:event_menuBoxActionPerformed

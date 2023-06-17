@@ -34,6 +34,10 @@ public class ChatFooter extends javax.swing.JPanel {
     /**
      * Creates new form ChatTitle
      */
+    
+    private MigLayout mig;
+    private MoreOptions moreOptions;
+    
     public UserAccountModel getUser() {
         return user;
     }
@@ -50,7 +54,8 @@ public class ChatFooter extends javax.swing.JPanel {
     }
 
     private void init() {
-        setLayout(new MigLayout("fillx, filly", "0[fill]0[]0[]2", "2[fill]2"));
+        mig = new MigLayout("fillx, filly", "0[fill]0[]0[]2", "2[fill]2[]0");
+        setLayout(mig);
         JScrollPane scroll = new JScrollPane();
         scroll.setBorder(null);
         JIMSendTextPane txt = new JIMSendTextPane();
@@ -70,7 +75,7 @@ public class ChatFooter extends javax.swing.JPanel {
         add(sb);
         add(scroll, "w 100%");
         JPanel panel = new JPanel();
-        panel.setLayout(new MigLayout("filly", "0[]0", "0[bottom]0"));
+         panel.setLayout(new MigLayout("filly", "0[]3[]0", "0[bottom]0"));
         panel.setPreferredSize(new Dimension(30, 28));
         panel.setBackground(Color.WHITE);
         JButton cmd = new JButton();
@@ -98,8 +103,34 @@ public class ChatFooter extends javax.swing.JPanel {
                 }
             }
         });
+        JButton cmdMore = new JButton();
+        cmdMore.setBorder(null);
+        cmdMore.setContentAreaFilled(false);
+        cmdMore.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cmdMore.setIcon(new ImageIcon(getClass().getResource("/chitchat/icons/more_disable.png")));
+        cmdMore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if(moreOptions.isVisible()) {
+                    cmdMore.setIcon(new ImageIcon(getClass().getResource("/chitchat/icons/more_disable.png")));
+                    moreOptions.setVisible(false);
+                    mig.setComponentConstraints(moreOptions, "dock south,h 0!");
+                    revalidate();
+                }
+                else {
+                    cmdMore.setIcon(new ImageIcon(getClass().getResource("/chitchat/icons/more.png")));
+                    moreOptions.setVisible(true);
+                    mig.setComponentConstraints(moreOptions, "dock south,h 170!");
+                    revalidate();
+                }
+            }
+        });
+        panel.add(cmdMore);
         panel.add(cmd);
-        add(panel);
+        add(panel,"wrap");
+        moreOptions = new MoreOptions();
+        moreOptions.setVisible(false);
+        add(moreOptions,"dock south,h 0!");
     }
 
     private void send(MessageSendingModel data) {
@@ -107,7 +138,7 @@ public class ChatFooter extends javax.swing.JPanel {
     }
 
     private void refresh() {
-        repaint();
+//        repaint();
         revalidate();
     }
     
@@ -121,8 +152,6 @@ public class ChatFooter extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(new java.awt.Color(229, 229, 229));
-        setMinimumSize(new java.awt.Dimension(400, 40));
-        setPreferredSize(new java.awt.Dimension(400, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

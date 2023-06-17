@@ -9,7 +9,6 @@ package chitchat.swing.utilities;
  *
  * @author Jatin Wadhwani
  */
-import javax.swing.Icon;
 import javax.swing.JProgressBar;
 
 public class Progress extends JProgressBar {

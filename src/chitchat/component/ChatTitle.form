@@ -25,8 +25,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="layer" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="387" max="32767" attributes="0"/>
+              <Component id="layer" pref="137" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="163" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -9,6 +9,7 @@ package chitchat.swing.utilities.blurhash;
  *
  * @author Jatin Wadhwani
  */
+
 import java.util.Arrays;
 
 class SRGB {

@@ -7,7 +7,7 @@ package chitchat.forms;
 
 import chitchat.event.PublicEvent;
 import chitchat.models.LoginModel;
-import utility.PasswordEncryption;
+import chitchat.utility.PasswordEncryption;
 
 /**
  *
