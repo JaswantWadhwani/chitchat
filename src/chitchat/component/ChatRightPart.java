@@ -34,6 +34,11 @@ public class ChatRightPart extends javax.swing.JLayeredPane {
         chatItem.setFile(fileName, fileSize);
     }
     
+    public void setEmoji(Icon icon) {
+        chatItem.hideText();
+        chatItem.setEmoji(true, icon);
+    }
+    
     public void setTime() {
         chatItem.setTime("10:36 PM"); //Testing Data
     }

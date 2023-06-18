@@ -41,9 +41,11 @@ public class ChatItem extends javax.swing.JLayeredPane {
     @Override
     protected void paintComponent(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D)graphics;
-        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics2D.setColor(getBackground());
-        graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+        if(getBackground() != null) {
+            graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics2D.setColor(getBackground());
+            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+        }
         super.paintComponent(graphics);
     }
     
@@ -106,6 +108,15 @@ public class ChatItem extends javax.swing.JLayeredPane {
         add(layeredPane , 0);
     }
             
+    public void setEmoji(boolean right, Icon icon) {
+        JLayeredPane layer = new JLayeredPane();
+        layer.setLayout(new FlowLayout(right ? FlowLayout.RIGHT : FlowLayout.LEFT));
+        layer.setBorder(new EmptyBorder(0, 5, 0, 5));
+        layer.add(new JLabel(icon));
+        add(layer);
+        setBackground(null);
+    }
+
     public void sendSuccess() {
         if(lblTime != null) {
             lblTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chitchat/icons/tick.png")));

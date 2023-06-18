@@ -5,6 +5,7 @@
  */
 package chitchat.component;
 
+import app.MessageType;
 import chitchat.event.PublicEvent;
 import chitchat.models.MessageSendingModel;
 import chitchat.models.UserAccountModel;
@@ -34,16 +35,16 @@ public class ChatFooter extends javax.swing.JPanel {
     /**
      * Creates new form ChatTitle
      */
-    
     private MigLayout mig;
     private MoreOptions moreOptions;
-    
+
     public UserAccountModel getUser() {
         return user;
     }
 
     public void setUser(UserAccountModel user) {
         this.user = user;
+        moreOptions.setUser(user);
     }
 
     private UserAccountModel user;
@@ -63,6 +64,10 @@ public class ChatFooter extends javax.swing.JPanel {
             @Override
             public void keyTyped(KeyEvent ke) {
                 refresh();
+                if (ke.getKeyChar() == 10 && ke.isControlDown()) {
+//                    user presses control+enter
+                    sendEvent(txt);
+                }
             }
         });
         txt.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,7 +80,7 @@ public class ChatFooter extends javax.swing.JPanel {
         add(sb);
         add(scroll, "w 100%");
         JPanel panel = new JPanel();
-         panel.setLayout(new MigLayout("filly", "0[]3[]0", "0[bottom]0"));
+        panel.setLayout(new MigLayout("filly", "0[]3[]0", "0[bottom]0"));
         panel.setPreferredSize(new Dimension(30, 28));
         panel.setBackground(Color.WHITE);
         JButton cmd = new JButton();
@@ -86,21 +91,7 @@ public class ChatFooter extends javax.swing.JPanel {
         cmd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String text = txt.getText().trim();
-                if (!text.equals("")) {
-                    MessageSendingModel message = new MessageSendingModel(Service.getInstance().getUser().getUserId(), user.getUserId(), Service.getInstance().getUser().getAge(), user.getAge(), text);
-//                    System.out.println(getClass() + " Line 87: age = " + user.getAge());
-                    send(message);
-//                    System.out.println(getClass() + " Line 89: age = " + user.getAge() + message.getText());
-//                    System.out.println(getClass() + "Line 90: sender id = " + Service.getInstance().getUser().getUserId() + "  receiver id = " + user.getUserId() + " age = " + Service.getInstance().getUser().getAge() + " text = " + text + " name = " + Service.getInstance().getUser().getUserName() + " age = " + user.getAge());
-                    PublicEvent.getInstance().getEventChat().sendMessage(message);
-//                    System.out.println(getClass() + "Line 92");
-                    txt.setText("");
-                    txt.grabFocus();
-                    refresh();
-                } else {
-                    txt.grabFocus();
-                }
+                sendEvent(txt);
             }
         });
         JButton cmdMore = new JButton();
@@ -111,13 +102,12 @@ public class ChatFooter extends javax.swing.JPanel {
         cmdMore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(moreOptions.isVisible()) {
+                if (moreOptions.isVisible()) {
                     cmdMore.setIcon(new ImageIcon(getClass().getResource("/chitchat/icons/more_disable.png")));
                     moreOptions.setVisible(false);
                     mig.setComponentConstraints(moreOptions, "dock south,h 0!");
                     revalidate();
-                }
-                else {
+                } else {
                     cmdMore.setIcon(new ImageIcon(getClass().getResource("/chitchat/icons/more.png")));
                     moreOptions.setVisible(true);
                     mig.setComponentConstraints(moreOptions, "dock south,h 170!");
@@ -127,10 +117,28 @@ public class ChatFooter extends javax.swing.JPanel {
         });
         panel.add(cmdMore);
         panel.add(cmd);
-        add(panel,"wrap");
+        add(panel, "wrap");
         moreOptions = new MoreOptions();
         moreOptions.setVisible(false);
-        add(moreOptions,"dock south,h 0!");
+        add(moreOptions, "dock south,h 0!");
+    }
+
+    private void sendEvent(JIMSendTextPane txt) {
+        String text = txt.getText().trim();
+        if (!text.equals("")) {
+            MessageSendingModel message = new MessageSendingModel(Service.getInstance().getUser().getUserId(), user.getUserId(), Service.getInstance().getUser().getAge(), user.getAge(), text, MessageType.TEXT);
+//                    System.out.println(getClass() + " Line 87: age = " + user.getAge());
+            send(message);
+//                    System.out.println(getClass() + " Line 89: age = " + user.getAge() + message.getText());
+//                    System.out.println(getClass() + "Line 90: sender id = " + Service.getInstance().getUser().getUserId() + "  receiver id = " + user.getUserId() + " age = " + Service.getInstance().getUser().getAge() + " text = " + text + " name = " + Service.getInstance().getUser().getUserName() + " age = " + user.getAge());
+            PublicEvent.getInstance().getEventChat().sendMessage(message);
+//                    System.out.println(getClass() + "Line 92");
+            txt.setText("");
+            txt.grabFocus();
+            refresh();
+        } else {
+            txt.grabFocus();
+        }
     }
 
     private void send(MessageSendingModel data) {
@@ -141,7 +149,7 @@ public class ChatFooter extends javax.swing.JPanel {
 //        repaint();
         revalidate();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

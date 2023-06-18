@@ -5,6 +5,7 @@
  */
 package chitchat.models;
 
+import app.MessageType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +18,15 @@ public class MessageReceivingModel {
     private String text;
     private int senderAge;
     private int receiverAge;
+    private MessageType messageType;
+
+    public MessageReceivingModel(int fromUserID, String text, int senderAge, int receiverAge, MessageType messageType) {
+        this.fromUserID = fromUserID;
+        this.text = text;
+        this.senderAge = senderAge;
+        this.receiverAge = receiverAge;
+        this.messageType = messageType;
+    }
 
     public int getFromUserID() {
         return fromUserID;
@@ -50,12 +60,15 @@ public class MessageReceivingModel {
         this.receiverAge = receiverAge;
     }
 
-    public MessageReceivingModel(int fromUserID, String text, int senderAge, int receiverAge) {
-        this.fromUserID = fromUserID;
-        this.text = text;
-        this.senderAge = senderAge;
-        this.receiverAge = receiverAge;
+    public MessageType getMessageType() {
+        return messageType;
     }
+
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
+    }
+    
+    
 
     public MessageReceivingModel(Object json) {
         JSONObject obj = (JSONObject) json;
@@ -64,6 +77,7 @@ public class MessageReceivingModel {
             text = obj.getString("text");
             senderAge = obj.getInt("senderAge");
             receiverAge = obj.getInt("receiverAge");
+            messageType = MessageType.toMessageType(obj.getInt("messageType"));
         } catch (JSONException e) {
             System.err.println(e);
         }
@@ -76,6 +90,7 @@ public class MessageReceivingModel {
             json.put("text", text);
             json.put("senderAge", senderAge);
             json.put("receiverAge", receiverAge);
+            json.put("messageType", messageType.getValue());
             return json;
         } catch (JSONException e) {
             return null;
